@@ -23,7 +23,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     private int theSize = 0;
     private int modCount = 0;
-    private Node<T> biginMarker;
+    private Node<T> beginMarker;
     private Node<T> endMarker;
 
     public MyLinkedList(){
@@ -71,6 +71,30 @@ public class MyLinkedList<T> implements Iterable<T> {
         this.forEach(item -> System.out.print(item +"  ") );
     }
 
+    public boolean contains(T entity){
+        return indexOf(entity) != -1;
+    }
+
+    private int indexOf(T entity){
+        int index = 0;
+        if (entity == null){
+            for (Node<T> i = beginMarker; i != null; i = i.next){
+                if (i.data == null){
+                    return index;
+                }
+                index ++;
+            }
+        }else{
+            for (Node<T> i = beginMarker; i != null; i = i.next){
+                if (i.data.equals(entity)){
+                    return index;
+                }
+                index ++;
+            }
+        }
+
+        return -1;
+    }
 
     private T remove(Node<T> node){
         node.prev.next = node.next;
@@ -103,7 +127,7 @@ public class MyLinkedList<T> implements Iterable<T> {
         Node<T> returnNode;
 
         if (index < theSize / 2){
-            returnNode = biginMarker;
+            returnNode = beginMarker;
             for (int i = 0; i < index; i++) {
                 returnNode = returnNode.next;
             }
@@ -118,16 +142,16 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     private void doClear() {
-        biginMarker = new Node<>(null,null,null);
-        endMarker = new Node<>(null,biginMarker,null);
-        biginMarker.next = endMarker;
+        beginMarker = new Node<>(null,null,null);
+        endMarker = new Node<>(null, beginMarker,null);
+        beginMarker.next = endMarker;
         theSize = 0;
         modCount ++;
     }
 
     private class LinkedListIterator implements Iterator<T> {
 
-        private Node<T> current = biginMarker.next;
+        private Node<T> current = beginMarker.next;
         private int expectedModCount = modCount;
         private boolean okToRemove = false;
 
