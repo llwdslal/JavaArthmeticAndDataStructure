@@ -46,14 +46,25 @@ public class InsertionSort {
 
     public static <T extends Comparable> void insertionSort(T[] array) {
         for (int i = 1; i < array.length; i++) {
-            T temp = array[i];
 
-            for (int j = i; j > 0 && temp.compareTo(array[j - 1]) < 0; j--) {
+            for (int j = i; j > 0 && array[j].compareTo(array[j - 1]) < 0; j--) {
+                T temp = array[j];
                 array[j] = array[j - 1];
                 array[j - 1] = temp;
             }
         }
     }
+
+    public static void insertionSort(int[] arr){
+        for (int i = 1; i < arr.length; i++){
+            for (int j = i ; j > 0 && arr[j] < arr[j - 1];j --){
+                 int temp = arr[j];
+                 arr[j] = arr[j - 1];
+                 arr[j - 1] = temp;
+            }
+        }
+    }
+
 
     private static <T extends Comparable> void printArray(T[] array) {
         Arrays.stream(array).forEach(element -> System.out.print(element.toString() + " "));
@@ -78,6 +89,16 @@ public class InsertionSort {
 
         System.out.println("排序后：");
         printArray(array);
+
+//        int[] array = new int[arraySize];
+//        for (int i = 0; i < arraySize; i++) {
+//            array[i] = random.nextInt(100);
+//        }
+//
+//        insertionSort(array);
+//
+//        Arrays.stream(array).forEach(System.out::println);
+
     }
 
 
