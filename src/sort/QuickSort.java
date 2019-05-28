@@ -21,13 +21,13 @@ public class QuickSort {
 
         swap(left + (int)(Math.random() * (right - left + 1)),right,arr );
 
-        int[] equalRange = partion(left,right,arr);
+        int[] equalRange = partition(left,right,arr);
 
         quickSort(left,equalRange[0] - 1,arr);
         quickSort(equalRange[1] + 1,right,arr);
     }
 
-    private static int[] partion(int left, int right, int[] arr) {
+    private static int[] partition(int left, int right, int[] arr) {
         int less = left - 1;
         int more = right;
         int current = left;
